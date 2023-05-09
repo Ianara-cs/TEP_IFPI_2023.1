@@ -1,4 +1,6 @@
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
@@ -16,8 +18,15 @@ def valida_cadastro(request):
     password = request.POST['senha']
     senha2 = request.POST['senha2']
 
-    user = User.objects.create_user(email=email, username=username, password=password)
-    return redirect('http://127.0.0.1:8000/my_wallet/cadastra_perfil')
+    try:
+        user = User.objects.create_user(email=email, username=username, password=password)
+        userAuthenticate = authenticate(request, username=user.username, password=password)
+        print(userAuthenticate)
+        if userAuthenticate is not None:
+            auth_login(request, userAuthenticate)
+            return redirect(request.POST.get('next', 'cadastra_perfil'))
+    except:
+        return redirect('cadastro')
 
 def valida_login(request): 
     username = request.POST['username']
@@ -25,7 +34,7 @@ def valida_login(request):
 
     user = authenticate(request, username=username, password=password)
     if user is not None:
-        login(request, user)
+        auth_login(request, user)
         return redirect(request.POST.get('next', 'cadastra_perfil'))
     else:
         print('erro de usuario ou password')

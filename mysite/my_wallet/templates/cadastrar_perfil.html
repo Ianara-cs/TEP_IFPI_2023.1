@@ -13,12 +13,12 @@
             <h1> Perfil </h1>
             <hr>
             <form action="{% url 'valida_perfil' %}" method="post"> {% csrf_token %}
-                <label for="tipo">Tipo de Perfil</label>
-                <select class="form-control" name="tipo_perfil" id="tipo-de-operacao">
+                <label for="tipo_perfil">Tipo de Perfil</label>
+                <select class="form-control" name="tipo_perfil" id="tipo_perfil">
                     <option value=""></option>
-                    <option value="Conservador">Conservador</option>
-                    <option value="Moderado">Moderado</option>
-                    <option value="Arrojado">Arrojado</option>
+                    <option value="C">Conservador</option>
+                    <option value="M">Moderado</option>
+                    <option value="A">Arrojado</option>
                 </select>
                 <br>
                 <input class="btn btn-info btn-lg" type="submit" value="Cadastrar">

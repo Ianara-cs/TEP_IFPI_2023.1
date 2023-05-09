@@ -16,6 +16,9 @@ class Investor(models.Model):
     )
     perfil = models.CharField(max_length=1, choices=choices_perfil)
 
+    def __str__(self) -> str:
+        return self.user.username
+
 
 #def validate_cod(value):
 #    for i in list(value):
@@ -42,4 +45,10 @@ class Transaction(models.Model):
     )
     tipo = models.CharField(max_length=1, choices=choices_tipo)
     corretagem = models.FloatField()
+    preco = models.FloatField()
     investor = models.ForeignKey(Investor, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return self.stock.cod
+    
+    

@@ -1,51 +1,64 @@
-{% extends 'base.html' %}
+{% extends 'side-menu-bar.html' %}
 
 {% block 'titulo' %} Cadastrar Transação {% endblock %}
 
 {% block 'conteudo' %}
-<div class="container">
-    <br>
-    <div class="row">
-        <div class="col-md-3">
+{% block 'menu' %}
+ {{ block.super }}
+{% endblock %}
 
-        </div>
-        <div class="col-md">
-            <h1> Cadastrar Transação</h1>
-            <hr>
+
+<div class="container pt-4 mt-5">
+    <div class="row align-items-lg-stretch">
+        <div class="col bg-dark d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded"></div>
+        <div class="col">
+            <h2 class="fw-bold text-center py-4">Adicionar Transação</h2>
             <form action="{% url 'valida_transacao' %}" method="post"> {% csrf_token %}
-                <label for="tipo">Tipo de operação</label>
-                <select class="form-control" name="tipo_operacao" id="tipo-de-operacao">
-                    <option value=""></option>
-                    <option value="Compra">Compra</option>
-                    <option value="Venda">Venda</option>
-                </select>
-                <br>
-                <label for="ativo">Ativo</label>
-                <input class="form-control" list="ativos" id="ativo" name="ativo">
-                <datalist id="ativos">
-                    {% for ativo  in ativos %}
+                <div class="mb-3">
+                    <label class="form-label" for="tipo">Tipo de operação</label>
+                    <select class="form-select" name="tipo_operacao" id="tipo-de-operacao">
+                        <option selected></option>
+                        <option value="C">Compra</option>
+                        <option value="V">Venda</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="ativo">Ativo</label>
+                    <input class="form-control" list="ativos" id="ativo" name="ativo">
+                    <datalist class="" id="ativos">
+                        {% for ativo  in ativos %}
                         <option value={{ativo.cod}}> {{ativo.nome_empresa}} </option>
-                    {% endfor %}
-                    <option value='rrttt'>
-                </datalist>
-                <br>
-                <label for="quantidade">Quantidade</label>
-                <input name="quantidade" class="form-control" type="number" placeholder="">
-                <br>
-                <label for="preco">Preço</label>
-                <input name="preco" class="form-control" type="number" step="any" placeholder="">
-                <br>
-                <label for="corretagem">Corretagem</label>
-                <input name="corretagem" class="form-control" type="number" step="any" placeholder="">
-                <br>
-                <label for="data">Data</label>
-                <input name="data" class="form-control" type="date">
-                <br>
-                <input class="btn btn-info btn-lg" type="submit" value="Cadastrar">
+                        {% endfor %}
+                    </datalist>
+                </div>
+                <div class="row mb-4">
+                    <div class="col">
+                        <label class="form-label" for="quantidade">Quantidade</label>
+                        <input name="quantidade" class="form-control" type="number" placeholder="">
+                    </div>
+                    <div class="col">
+                        <label class="form-label"  for="preco">Preço</label>
+                        <input name="preco" class="form-control" type="number" step="any" placeholder="">
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col">
+                        <label class="form-label" for="corretagem">Corretagem</label>
+                        <input name="corretagem" class="form-control" type="number" step="any" placeholder="">
+                    </div>
+                    <div class="col">
+                        <label class="form-label" for="data">Data</label>
+                        <input name="data" class="form-control" type="date">
+                    </div>
+                </div>
+                <div class="d-grid">
+                    <input class="btn btn-primary" type="submit" value="Adicionar">
+                </div>
             </form>
         </div>
-        <div class="col-md-3"></div>
     </div>
 </div>
+
 
 {% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'side-menu-bar.html'%}
+{% load static %}
+{% block 'titulo' %} Transações {% endblock %}
+
+{% block 'head' %} 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+
+{{ block.super }}
+{% endblock %}
+
+{% block 'conteudo' %}
+{% block 'menu' %}
+ {{ block.super }}
+{% endblock %}
+
+<div class="container pt-5 mt-5">
+    <table id="example" class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Data</th>
+          <th scope="col">Ativo</th>
+          <th scope="col">Tipo de operaçao</th>
+          <th scope="col">quantidade</th>
+          <th scope="col">Preço unitário</th>
+          <th scope="col">Total</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      {% for transaction  in transactions %}
+        <tbody>
+          <tr>
+            <th scope="row">{{transaction.data | date:"SHORT_DATE_FORMAT"}}</th>
+            <td>{{transaction.stock}}</td>
+            <td>{{transaction.tipo}}</td>
+            <td>{{transaction.quantidade_acoes}}</td>
+            <td>{{transaction.preco | floatformat:2}}</td>
+            <td>{{transaction.stock}}</td>
+            <td><a class="btn btn-primary" href="{% url 'detalhes' transaction.id %}">Detalhes</a></td>
+          </tr>
+      {% endfor %}
+    </table>
+</div>
+
+{% endblock %}
+
+{% block 'script' %} 
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+<script src="{% static 'js/script.js' %}"></script>
+{% endblock %}

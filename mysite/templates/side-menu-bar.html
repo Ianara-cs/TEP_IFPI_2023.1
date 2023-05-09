@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block 'head' %} 
+<style>
+    .item-nav {}
+    
+    .item-nav:hover {
+        background-color: #0d6efd;
+    }
+
+</style>
+{% endblock %}
+
+{% block 'conteudo' %}
+    {% block 'menu' %}
+        <nav class="navbar shadow navbar-dark bg-light fixed-top">
+            <div class="container-fluid">
+                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+                    aria-controls="offcanvasExample">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <a href="" class="navbar-brand text-dark">Menu</a>
+            </div>
+        </nav>
+
+
+        <div class="offcanvas offcanvas-start d-flex flex-column flex-shrink-0 p-3 bg-light" tabindex="-1" id="offcanvasExample"
+            aria-labelledby="offcanvasExampleLabel" style="width: 280px;">
+
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                <svg class="bi pe-none me-2" width="40" height="32">
+                    <use xlink:href="#bootstrap" />
+                </svg>
+                <span class="fs-4">Sidebar</span>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="#" class="nav-link link-dark item-nav" aria-current="page">
+                        <i class="bi bi-house m-2"></i>
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link link-dark item-nav">
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'transacoes' %}" class="nav-link link-dark item-nav">
+                        Operações
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <div class="dropdown">
+                <a href="{% url 'logout' %}" class="link-dark text-decoration-none btn btn-info btn-lg"
+                    aria-expanded="false">
+                    <strong>Logout</strong>
+                </a>
+            </div>
+
+
+        </div>
+
+    {% endblock %}
+{% endblock %}
